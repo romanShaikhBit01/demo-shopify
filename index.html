@@ -41,14 +41,14 @@
     <button name="button" value="" type="button" onclick="getProducts()">Show Products</button>
     <button name="button" value="" type="button" onclick="createProduct()">Create Products</button>
     <script>
-        let products;
+        let products = [];
         async function getProducts() {
-            let url = 'https://2f8c-43-242-116-196.ngrok.io/app/products?shop=first-step-demo.myshopify.com';
+            let url = 'https://e8d1-43-242-116-196.ngrok.io/app/products?shop=first-step-demo.myshopify.com';
             let response = await axios.get(
                 url,
             );
             console.log('products : ', response);
-            products = response.data.products;
+            products = response.data.data;
             console.log(products)
 
             for (let i = 0; i < products.length; i++) {
@@ -60,7 +60,7 @@
 
         async function createProduct() {
             console.log('create clicked');
-            let url = 'https://2f8c-43-242-116-196.ngrok.io/app/products/create?shop=first-step-demo.myshopify.com';
+            let url = 'https://e8d1-43-242-116-196.ngrok.io/app/products/create?shop=first-step-demo.myshopify.com';
             let response = await axios.post(
                 url,{}
             );
