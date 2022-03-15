@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>This is the title of the webpage!</title>
+    <style>
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            margin: auto;
+            text-align: center;
+            font-family: arial;
+        }
+
+        .price {
+            color: grey;
+            font-size: 22px;
+        }
+
+        .card button {
+            border: none;
+            outline: 0;
+            padding: 12px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+
+        .card button:hover {
+            opacity: 0.7;
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+</head>
+
+<body>
+    <button name="button" value="" type="button" onclick="getProducts()">Show Products</button>
+    <button name="button" value="" type="button" onclick="createProduct()">Create Products</button>
+    <script>
+        let products;
+        async function getProducts() {
+            let url = 'https://2f8c-43-242-116-196.ngrok.io/app/products?shop=first-step-demo.myshopify.com';
+            let response = await axios.get(
+                url,
+            );
+            console.log('products : ', response);
+            products = response.data.products;
+            console.log(products)
+
+            for (let i = 0; i < products.length; i++) {
+                document.write('<div class="card">');
+                document.write('<h1>' + products[i].title + '</h1>');
+                document.write('</div>');
+            }
+        }
+
+        async function createProduct() {
+            console.log('create clicked');
+            let url = 'https://2f8c-43-242-116-196.ngrok.io/app/products/create?shop=first-step-demo.myshopify.com';
+            let response = await axios.post(
+                url,{}
+            );
+            console.log('products : ', response);
+            products = response.data.products;
+            console.log(products)
+        }
+
+    </script>
+    <!-- <div class="card">
+        <img src="/w3images/jeans3.jpg" alt="Denim Jeans" style="width:100%" />
+        <h1>Tailored Jeans</h1>
+        <p class="price">$19.99</p>
+        <p>Some text about the jeans. Super slim and comfy lorem ipsum lorem jeansum. Lorem jeamsun denim lorem jeansum.
+        </p>
+        <p><button>Add to Cart</button></p>
+    </div> -->
+</body>
+
+</html>
