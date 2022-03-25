@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Home Page</title>
+
+	<head>
+		<title>This is the title of the webpage!</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+	</head>
+	<style type="text/css" media="screen">
+		.card {
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+			max-width: 300px;
+			margin: auto;
+			text-align: center;
+			font-family: arial;
+		}
+
+		.price {
+			color: grey;
+			font-size: 22px;
+		}
+
+		.card button {
+			border: none;
+			outline: 0;
+			padding: 12px;
+			color: white;
+			background-color: #000;
+			text-align: center;
+			cursor: pointer;
+			width: 100%;
+			font-size: 18px;
+		}
+
+		.card button:hover {
+			opacity: 0.7;
+		}
+	</style>
+</head>
+
+<body>
+	</br></br></br></br></br></br></br>
+	<button onclick="myFunction()">Show Product</button>
+	<div id="myDIV">
+		<ul>
+			<% helper.products.forEach(function(item) { %>
+				<li>
+					<%= item.title %>
+				</li>
+				<% }); %>
+		</ul>
+	</div>
+
+	<script>
+		function myFunction() {
+			var x = document.getElementById("myDIV");
+			if (x.style.display === "none") {
+				x.style.display = "block";
+			} else {
+				x.style.display = "none";
+			}
+		}
+	</script>
+
+
+</body>
+
+</html>
