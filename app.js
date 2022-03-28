@@ -35,8 +35,8 @@ app.use(express.urlencoded({ extended: false }));
 const AppSession = require('./models/appSession.model');
 app.get('/', async (req, res) => {
     if (typeof shops[req.query.shop] !== 'undefined') {
-        // res.send('Welcome to shopify')
-        res.sendFile(path.join(__dirname + '/index.html'));
+        res.send('Welcome to shopify')
+        // res.sendFile(path.join(__dirname + '/index.html'));
         // res.render('home', { async: true, helper: commonFunction });
         // res.render('home', { helper: await commonFunction.getProducts() })
     } else {
@@ -327,9 +327,21 @@ app.post('/app/delete-product/:id', async (req, res) => {
     }
 });
 
-app.post('/webhooks/app/uninstall', async (req, res) => {
+app.post('/webhooks', async (req, res) => {
     console.log('In webhook');
     console.log(req);
+});
+
+app.get('/webhooks/get-webhooks', async (req, res) => {
+    console.log('In webhook list');
+
+    let shopifySession = await AppSession.findOne({});
+    const client = new Shopify.Clients.Rest(shopifySession.shop, shopifySession.access_token);
+    const data = await client.get({
+        path: 'webhooks',
+    });
+    res.status(200).send(data)
+    console.log(data);
 });
 
 app.listen(port, () => {
